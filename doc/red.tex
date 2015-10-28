@@ -1,0 +1,233 @@
+\documentclass[12pt]{article}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+%\ usepackage[printwatermark]{xwatermark}
+%\ usepackage{xcolor}
+\usepackage[pdftex]{graphicx}
+\usepackage{hyperref}
+
+\usepackage{color}
+\definecolor{bg}{rgb}{0.93,0.93,0.9}
+%\definecolor{bg}{rgb}{0.1,0.1,0.0}
+
+% colorir código fonte
+\usepackage{minted}
+\usemintedstyle{tango}
+
+\usepackage{fancyhdr}
+
+\usepackage{draftwatermark}
+\SetWatermarkScale{4}
+\SetWatermarkText{Rascunho}
+
+\usepackage{framed, color}
+\definecolor{shadecolor}{rgb}{0.93,0.93,0.9}
+
+% \newwatermark*[allpages,color=bg,angle=45,scale=3,xpos=0,ypos=0]{DRAFT}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Share\LaTeX}
+\fancyhead[RE,LO]{\textbf{Red} Programming Language}
+\fancyfoot[CE,CO]{\leftmark}
+\fancyfoot[LE,RO]{\thepage}
+
+\title{\huge \textbf{\textcolor{red}{Red}} \\Programming Language}
+\author{Guaracy Monteiro \\ guaracy.bm@gmail.com} %\thanks{emcs, \LaTeX , \AucTeX}
+\date{Outubro 2015}
+
+\begin{document}
+\begin{titlepage}
+\begin{figure}  %[h!t]
+\centering
+\includegraphics[scale=1]{Red_Language_Tower_Logo.png}
+\end{figure}
+\maketitle
+\end{titlepage}
+
+\tableofcontents
+\pagebreak
+\renewcommand\listingscaption{Listagem}
+\renewcommand\listoflistingscaption{Listagens}
+\listoflistings
+\pagebreak
+
+
+\section{Introdução}
+
+\textit{\textcolor{red}{\textbf{ATENÇÃO:} A linguagem encontra-se em desenvolvimento e não está apta para ser
+usada em produção. Muita coisa poderá ser alterada neste documento.}}
+
+\textit{\textcolor{red}{\textbf{OBS:} Para salientar a sintaxe dos programas em Red no \LaTeX, estou usando o
+\textbf{``minted''} que usa o \textbf{``pygmentize''} para efetuar a tarefa.
+Para ficar correto, é necessário que seja colocado no início \textbf{Red [ ]}.}}
+
+\subsection{Objetivo}
+
+O objetivo inicial não é o de ser um manual, livro ou algo do gênero sobre a
+linguagem. Apenas um local para que eu possa agrupar as informações e o
+conhecimento sobre a linguagem. Em segundo lugar, compartilhar a linguagem com
+quem estiver interessado. Vender e ficar rico está fora de cogitação. :D
+
+\subsection{A Linguagem}
+
+A linguagem Red é fortemente baseada em REBOL compartilhando, entre outros, a
+homoiconicidade, o grande número de tipos de dados, a mistura código+data como
+em Lisp. Como diferenças é possível citar a possibilidade de gerar executáveis
+em código nativo (não precisa ser na mesma plataforma de desenvolviemnto) e a
+tipagem opcional para parâmetros nas funções.
+
+\subsection{Configuração}
+
+Para criar um ambiente de desenvolvimento não são necessários poderes especiais.
+A primeira coisa a fezer é baixar de 
+\href{http://www.red-lang.org/p/download.html}{www.red-lang.org} a versão para o
+seu sistema operacional e colocar no local que ficar mais conveniente. Note que
+para o Linux, a versão disponível é de 32 bits. Para rodar em uma instalação de
+64 bits é necessário instalar algumas bibliotecas para suportar a versão. As
+formas mais comuns de executar o programa são:
+
+\begin{itemize}
+\item Apenas executar o programa \textbf{red} e entrará no REPL (ead–eval–print loop),
+  isto é, um ambiente interativo onde você vai digitando e executando as
+  instruções.
+\item Executando \textbf{red \textless arquivo.red\textgreater} o script
+  existente no arquivo será executado.
+\item Executando \textbf{red -c \textless arquivo.red\textgreater} o script
+  existente no arquivo será compilado e irá gerar um executável para a
+  plataforma atual.
+\item Executando \textbf{red -c -t \textless plataforma\textgreater \textless
+    arquivo.red\textgreater}, o script será compilado para a plataforma
+  especificada. Assim você pode estar no Linux e gerar executáveis, por exemplo,
+  para Linux, Windows, Android e OSX, sem a necessidade de trocar de ambiente.
+  As plataformas disponíveis são:
+  \begin{itemize}
+  \item \textbf{MSDOS} : Windows, x86, aplicações console (+ GUI)
+  \item \textbf{Windows} : Windows, x86, GUI applications
+  \item \textbf{Linux} : GNU/Linux, x86
+  \item \textbf{Linux-ARM} : GNU/Linux, ARMv5, armel (soft-float)
+  \item \textbf{RPi} : GNU/Linux, ARMv5, armhf (hard-float)
+  \item \textbf{Darwin} : MacOSX Intel, apenas aplicações console
+  \item \textbf{Syllable} : Syllable OS, x86
+  \item \textbf{FreeBSD} : FreeBSD, x86
+  \item \textbf{Android} : Android, ARMv5
+  \item \textbf{Android-x86} : Android, x86
+  \end{itemize}
+
+\end{itemize}
+
+\section{Sintaxe}
+
+Antes de começar qualquer coisa, aprender um pouco da sintaxe é importante. Até
+porque você deve estar acostumado com aquelas linguagens complicadas onde é
+necessário separar algumas coisas com vírgula, outras com ponto e vírgula,
+outras com chaves, outras com colchetes, etc., etc., etc..
+Então vamos lá:
+
+\subsection{Delimitadores}
+
+Basicamente são três os delimitadores. Para string, blocos e caminho.
+\begin{itemize}
+\item \textbf{Strings} : utiliza-se aspas ( \textbf{" "} ) para strings que não
+  possuam quebra de linha no interior ou chaves (\textbf{ \{ \}} ) caso a string
+  tenha mais de uma linha. 
+\item \textbf{Blocos} : os blocos são delimitados por colchetes ( \textbf{[ ]} )
+\item \textbf{Caminhos} : são delimitados (ou concatenados) com a barra
+  invertida ( \textbf{\textbackslash} 
+)
+\end{itemize}
+
+\subsection{Sintaxe livre}
+O delimitador padrão é o espaço e, a única restrição é separar os tokens por um
+ou mais espaços. Os códigos abaixo são todos válidos e possuem a mesma
+avaliação:
+
+\begin{listing}[ht]
+\begin{minted}[bgcolor=bg,
+fontsize=\scriptsize,
+linenos,
+showtabs=true,
+]{Red}
+Red []
+while [a > 0][print "loop" a: a - 1]
+
+while [a > 0]
+  [print "loop" a: a - 1]
+
+while [
+  a > 0
+][
+  print "loop" 
+  a: a - 1
+]
+
+while [
+  a > 0
+][
+  print "loop" 
+  a: a - 1
+]
+\end{minted}
+\caption{Free-form syntax}
+\label{listing:1}
+\end{listing}
+
+Note que, se você entrar com \textbf{a\textless0} ou \textbf{a-1} (sem espaços) causará
+um erro. Ou melhor, poderá causar um erro já que serão consideradas como
+palavras (variáveis) e poderão existir e conter um valor válido. 
+
+\subsection{Comentários}
+Existem dois tipos de comentários (trechos que são ignorados pelo programa): 
+\begin{itemize}
+\item O comentário que inicia com ponto e vírgula ( \textbf{;} ) e vai até o
+  final da linha e pode ser utilizado em qualquer parte do programa e
+\item o comentário com mais de uma linha que inicia com \textbf{comment \{} e
+  termina com um fecha chave ( \textbf{\}} ) pode ser utilizado em qualquer
+  parte do programa menos no meio de uma expressão.
+\end{itemize}
+
+\section{REPL}
+Em vez de criar um script em um editor, executar e/ou compilar, acredito que o 
+mais interessante no início seja digitar e ver o resultado. Para tal, basta usar
+o REPL (read-eval-print-loop). Como o nome já diz, ele lê uma entrada efetuada
+pelo usuário, efetua uma avaliaçã, mostra o resultado e fica esperando uma nova
+entrada. Para iniciar, basta executar \textbf{red} sem nenhum argumento e deverá
+aparecer algo como:
+
+\begin{shaded}
+\begin{verbatim}
+--== Red 0.5.4 ==-- 
+Type HELP for starting information. 
+
+red>>
+\end{verbatim}
+\end{shaded}
+
+Digitando help e enter, serão apresentadas algumas opções para auxílio.
+
+\section{Variáveis}
+\section{Tipos de dados}
+\section{Expressões}
+\section{Funções}
+\section{Escopo}
+\section{Operadores}
+\section{Controle de fluxo}
+\section{Excessões}
+\section{Pilha}
+\section{Depuração}
+\section{Estrutura do sistema}
+\section{Palavras reservadas}
+\section{VID}
+
+
+
+
+
+Como lisp, os códigos podem ser misturados com os dados. Se
+temos um bloco \mint{Rebol}| Rebol[] a: [1 2 3 4 5]|, então outro exemplo pode
+ser o \mint{red}|
+foreach i [1 2 3 4 5 6] [print i] ;loop pelo bloco|.
+
+
+\end{document}
+
