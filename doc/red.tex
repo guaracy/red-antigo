@@ -203,7 +203,58 @@ red>>
 \end{verbatim}
 \end{shaded}
 
-Digitando help e enter, serão apresentadas algumas opções para auxílio.
+Para sair digite \textbf{q} ou \textbf{quit} e pressione enter. Digitando help e
+enter, serão apresentadas algumas opções para auxílio. Lembre-se que o 
+
+Apesar de não necessitar a digitação de \textbf{Red [ ]} que aparecem nas
+listagens para efeitos de salientar a sintaxe do script, se entrar no REPL não
+terá problema nenhum. O REPL entende que a entrada de uma nova linha seja a
+indicação para que ele avalie a entrada. Faz-se necessário que o comando seja
+digitado em uma linha a menos que ele termine com a abertura de um bloco
+\textbf{[}. Neste caso, ele mudara o prompt de
+\textbf{red\textgreater\textgreater} para uma abertura de colchetes  \textbf{[}
+indicando que está esperando o fechamento para avaliar a expressão.
+
+
+\begin{shaded}
+\begin{verbatim}
+red>> a: 5
+== 5
+red>> while [a > 0]
+*** Script error: while is missing its body argument
+*** Where: while
+red>> while [a > 0] [
+[    print
+[    "loop"
+[    a: a - 1
+[    ]
+loop
+loop
+loop
+loop
+loop
+red>> 
+\end{verbatim}
+\end{shaded}
+
+Utilizando as setas para cima e para baixo é possível navegar no hitórico para a
+execução de expressões informadas anteriormente. Se você digitar algo e
+pressionar tab, o REPL irá mostrar uma relação das possíveis funções que podem
+ser entradas, inclusive as definidas pelo usuário. Se for digitado a e tab,
+teremos algo como:
+
+\begin{shaded}
+\begin{verbatim}
+red>> action! any any-type! all absolute add and~ append at
+any-object! any-string! any-word! any-function! any-block! 
+arcsine arccosine arctangent arctangent2 as-pair any-path! 
+a attempt action? ask a-an acos asin atan aqua any-block? 
+any-function? any-object? any-path? any-string? any-word? 
+atan2 and about 
+red>> a
+\end{verbatim}
+\end{shaded}
+
 
 \section{Variáveis}
 \section{Tipos de dados}
