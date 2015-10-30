@@ -1,14 +1,18 @@
-\documentclass[12pt]{article}
-\usepackage[brazil]{babel}
-\usepackage[utf8]{inputenc}
-%\ usepackage[printwatermark]{xwatermark}
-%\ usepackage{xcolor}
-\usepackage[pdftex]{graphicx}
-\usepackage{hyperref}
+\documentclass[12pt,a4paper]{article}
+%\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{alltt}
+%\usepackage[T1]{fontenc}
+%\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
 
-\usepackage{color}
-\definecolor{bg}{rgb}{0.93,0.93,0.9}
-%\definecolor{bg}{rgb}{0.1,0.1,0.0}
+\usepackage[brazil]{babel}
+%\ usepackage[printwatermark]{xwatermark}
+\usepackage[pdftex]{graphicx}
+\usepackage[colorlinks=true,linkcolor=blue]{hyperref}
+%\usepackage{hyperref}
+
+\definecolor{bg}{rgb}{0.16,0.16,0.16}
 
 % colorir código fonte
 \usepackage{minted}
@@ -19,6 +23,7 @@
 \usepackage{draftwatermark}
 \SetWatermarkScale{4}
 \SetWatermarkText{Rascunho}
+
 
 \usepackage{framed, color}
 \definecolor{shadecolor}{rgb}{0.93,0.93,0.9}
@@ -32,9 +37,42 @@
 \fancyfoot[CE,CO]{\leftmark}
 \fancyfoot[LE,RO]{\thepage}
 
+\input{highlight.sty}
+
+
+\newcommand{\inchf}[2]{
+  \begin{listing}[ht]
+    \begin{shaded}
+      \small{
+        \input{./fragmentos/#1.red.tex}
+      }
+    \end{shaded}
+    \caption{#2}
+    \label{listing:3}
+  \end{listing}
+}
+
+\newcommand{\incss}[1]{
+  \ttfamily\small
+  \begin{shaded}
+    \VerbatimInput{./fragmentos/#1.ss}
+  \end{shaded}
+  \normalfont
+}
+
+\newcommand{\Red}{\textbf{\textcolor{red}{Red }}}
+
+\newcommand{\codigo}[1]{
+  \ttfamily\small
+  \textcolor{Brown}{
+    \textbf{#1}
+  }
+  \normalfont
+}
+
 \title{\huge \textbf{\textcolor{red}{Red}} \\Programming Language}
-\author{Guaracy Monteiro \\ guaracy.bm@gmail.com} %\thanks{emcs, \LaTeX , \AucTeX}
-\date{Outubro 2015}
+\author{Guaracy Monteiro \\ \small https://github.com/guaracy/red} %\thanks{emcs, \LaTeX , \TeX}
+\date{\today}
 
 \begin{document}
 \begin{titlepage}
@@ -45,22 +83,20 @@
 \maketitle
 \end{titlepage}
 
+\setcounter{tocdepth}{2}
+%level -1: part, 0: chapter, 1: section, etc.
+
 \tableofcontents
 \pagebreak
 \renewcommand\listingscaption{Listagem}
 \renewcommand\listoflistingscaption{Listagens}
 \listoflistings
+\listoftables
 \pagebreak
 
+\shorthandoff{"}
 
 \section{Introdução}
-
-\textit{\textcolor{red}{\textbf{ATENÇÃO:} A linguagem encontra-se em desenvolvimento e não está apta para ser
-usada em produção. Muita coisa poderá ser alterada neste documento.}}
-
-\textit{\textcolor{red}{\textbf{OBS:} Para salientar a sintaxe dos programas em Red no \LaTeX, estou usando o
-\textbf{``minted''} que usa o \textbf{``pygmentize''} para efetuar a tarefa.
-Para ficar correto, é necessário que seja colocado no início \textbf{Red [ ]}.}}
 
 \subsection{Objetivo}
 
@@ -71,16 +107,16 @@ quem estiver interessado. Vender e ficar rico está fora de cogitação. :D
 
 \subsection{A Linguagem}
 
-A linguagem Red é fortemente baseada em REBOL compartilhando, entre outros, a
+A linguagem \Red é fortemente baseada em REBOL compartilhando, entre outros, a
 homoiconicidade, o grande número de tipos de dados, a mistura código+data como
 em Lisp. Como diferenças é possível citar a possibilidade de gerar executáveis
-em código nativo (não precisa ser na mesma plataforma de desenvolviemnto) e a
+em código nativo (não precisa ser na mesma plataforma de desenvolvimento) e a
 tipagem opcional para parâmetros nas funções.
 
 \subsection{Configuração}
 
 Para criar um ambiente de desenvolvimento não são necessários poderes especiais.
-A primeira coisa a fezer é baixar de 
+A primeira coisa a fazer é baixar de 
 \href{http://www.red-lang.org/p/download.html}{www.red-lang.org} a versão para o
 seu sistema operacional e colocar no local que ficar mais conveniente. Note que
 para o Linux, a versão disponível é de 32 bits. Para rodar em uma instalação de
@@ -128,13 +164,13 @@ Então vamos lá:
 
 Basicamente são três os delimitadores. Para string, blocos e caminho.
 \begin{itemize}
-\item \textbf{Strings} : utiliza-se aspas ( \textbf{" "} ) para strings que não
-  possuam quebra de linha no interior ou chaves (\textbf{ \{ \}} ) caso a string
+\item \textbf{Strings} : utiliza-se aspas ( \texttt{"string"} ) para strings que não
+  possuam quebra de linha no interior ou chaves (\textbf{ \{string até\\ aqui\}} ) caso a string
   tenha mais de uma linha. 
 \item \textbf{Blocos} : os blocos são delimitados por colchetes ( \textbf{[ ]} )
+  e não possuem limite.
 \item \textbf{Caminhos} : são delimitados (ou concatenados) com a barra
-  invertida ( \textbf{\textbackslash} 
-)
+  invertida ( \textbf{\textbackslash} )
 \end{itemize}
 
 \subsection{Sintaxe livre}
@@ -142,37 +178,9 @@ O delimitador padrão é o espaço e, a única restrição é separar os tokens 
 ou mais espaços. Os códigos abaixo são todos válidos e possuem a mesma
 avaliação:
 
-\begin{listing}[ht]
-\begin{minted}[bgcolor=bg,
-fontsize=\scriptsize,
-linenos,
-showtabs=true,
-]{Red}
-Red []
-while [a > 0][print "loop" a: a - 1]
+\inchf{freeformsyntax}{Sintaxe livre}
 
-while [a > 0]
-  [print "loop" a: a - 1]
-
-while [
-  a > 0
-][
-  print "loop" 
-  a: a - 1
-]
-
-while [
-  a > 0
-][
-  print "loop" 
-  a: a - 1
-]
-\end{minted}
-\caption{Free-form syntax}
-\label{listing:1}
-\end{listing}
-
-Note que, se você entrar com \textbf{a\textless0} ou \textbf{a-1} (sem espaços) causará
+Note que, se você entrar com  \textbf{a $<$ 0} ou \textbf{a-1} (sem espaços) causará
 um erro. Ou melhor, poderá causar um erro já que serão consideradas como
 palavras (variáveis) e poderão existir e conter um valor válido. 
 
@@ -190,18 +198,11 @@ Existem dois tipos de comentários (trechos que são ignorados pelo programa):
 Em vez de criar um script em um editor, executar e/ou compilar, acredito que o 
 mais interessante no início seja digitar e ver o resultado. Para tal, basta usar
 o REPL (read-eval-print-loop). Como o nome já diz, ele lê uma entrada efetuada
-pelo usuário, efetua uma avaliaçã, mostra o resultado e fica esperando uma nova
+pelo usuário, efetua uma avaliação, mostra o resultado e fica esperando uma nova
 entrada. Para iniciar, basta executar \textbf{red} sem nenhum argumento e deverá
 aparecer algo como:
 
-\begin{shaded}
-\begin{verbatim}
---== Red 0.5.4 ==-- 
-Type HELP for starting information. 
-
-red>>
-\end{verbatim}
-\end{shaded}
+\incss{repl}
 
 Para sair digite \textbf{q} ou \textbf{quit} e pressione enter. Digitando help e
 enter, serão apresentadas algumas opções para auxílio. Lembre-se que o 
@@ -212,89 +213,129 @@ terá problema nenhum. O REPL entende que a entrada de uma nova linha seja a
 indicação para que ele avalie a entrada. Faz-se necessário que o comando seja
 digitado em uma linha a menos que ele termine com a abertura de um bloco
 \textbf{[}. Neste caso, ele mudara o prompt de
-\textbf{red\textgreater\textgreater} para uma abertura de colchetes  \textbf{[}
+\textbf{red $>>$} para uma abertura de colchetes  \textbf{[}
 indicando que está esperando o fechamento para avaliar a expressão.
 
+\incss{repl-input}
 
-\begin{shaded}
-\begin{verbatim}
-red>> a: 5
-== 5
-red>> while [a > 0]
-*** Script error: while is missing its body argument
-*** Where: while
-red>> while [a > 0] [
-[    print
-[    "loop"
-[    a: a - 1
-[    ]
-loop
-loop
-loop
-loop
-loop
-red>> 
-\end{verbatim}
-\end{shaded}
-
-Utilizando as setas para cima e para baixo é possível navegar no hitórico para a
+Utilizando as setas para cima e para baixo é possível navegar no histórico para a
 execução de expressões informadas anteriormente. Se você digitar algo e
 pressionar tab, o REPL irá mostrar uma relação das possíveis funções que podem
 ser entradas, inclusive as definidas pelo usuário. Se for digitado a e tab,
 teremos algo como:
 
-\begin{shaded}
-\begin{verbatim}
-red>> action! any any-type! all absolute add and~ append at
-any-object! any-string! any-word! any-function! any-block! 
-arcsine arccosine arctangent arctangent2 as-pair any-path! 
-a attempt action? ask a-an acos asin atan aqua any-block? 
-any-function? any-object? any-path? any-string? any-word? 
-atan2 and about 
-red>> a
-\end{verbatim}
-\end{shaded}
+\incss{repl-tab}
 
 Se você digita \textbf{help} ou \textbf{?} seguido de uma função, será mostrado
 um resumo da função informando como ela é utilizada, uma breve descrição da
 função, os argumentos e alguns refinamentos. Para insert, temos:
 
-\begin{shaded}
-\begin{verbatim}
-red>> help insert
-
-USAGE:
-    insert series  value  /part  length  /only  /dup  count
-
-DESCRIPTION:
-     Inserts value(s) at series index; returns series head. 
-     insert is of type: action!
-
-ARGUMENTS:
-     series  [series! bitset! map!]
-     value  [any-type!]
-
-REFINEMENTS:
-     /part => Limit the number of values inserted.
-         length  [number! series!]
-     /only => Insert block types as single values (overrides /part).
-     /dup => Duplicate the inserted values.
-         count  [number!]
-
-red>> 
-\end{verbatim}
-\end{shaded}
-
+\incss{repl-help}
 
 
 \section{Variáveis}
+
+Toda a linguagem possui alguma forma de armazenar um determinado valor em algum
+lugar No caso de \Red variáveis (ou palavras) podem armazenar (ao associar)
+dados ou código. 
+
+\subsection{Nomenclatura}
+
+\subsection{Operação}
+
+A associação ou atribuição é feita seguindo a variável com dois pontos (
+\textbf{:} ). Por exemplo, \codigo{nome: "Fulano de Tal"} irá atribuir
+\codigo{"Fulano de Tal"} a variável \codigo{nome}. Para avaliar a variável e
+retornar o seu valor, basta informar o nome da variável. No caso de termos 
+\codigo{cliente: nome}, indica que iremos atribuir o conteúdo da variável
+\codigo{nome} para a variável \codigo{cliente}. Existem casos onde não é
+possível a construção acima como no caso onde o conteúdo da variável é uma
+função. Para tal, precede-se o nome da variável com dois pontos e será retornado
+o conteúdo mas não será avaliado. Finalmente podemos tratar a variável como
+símbolo e retornará o nome da variável. Por exemplo: 
+
+\incss{repl-var}
+
+Podemos ver que \Red não é uma linguagem tipada, isto é, as variáveis podem
+conter qualquer valor mas, depois de assumirem um valor, possuirão um tipo
+correspondente que será utilizado para validar a avaliação das expressões. No
+caso de funções, é possível especificar o tipo de parâmetro que será aceito.
+Nada impede que a função trate os diversos tipos para retornar resultados
+válidos. No exemplo, \codigo{sum a + b} retornou um erro pois não foi possível
+adicionar um inteiro em um bloco (no caso pode ser considerado como uma lista).
+Bastiria que a função, por exemplo, adicionasse o número em cada um dos
+elementos. Da mesma forma, para atribuir a função \codigo{sum} para a variável
+\codigo{x} foi necessário utilizar o formato \codigo{x: :sum} para que a função
+não fosse avaliada. A construção \codigo{x: sum 2 3} seria válidade e retornaria
+o valor \codigo{5}. Portanto:
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Formato} & \textbf{Significado} \\
+\hline
+\hline
+\codigo{var} & Avalia a variável e retorna o resultado. \\
+\hline
+\codigo{var:} & Atribui um valor a uma variável. \\
+\hline
+\codigo{:var} & Retorna o valor de uma variável sem avaliá-lo.\\
+\hline
+\codigo{'var} & Trata a variável como um simbolo e retorna o valor sem avaliá-lo.\\
+\hline
+\end{tabular}
+\end{center}
+
 \section{Tipos de dados}
+
+Este é um tópico onde REBOL é muito rico e, por consequencia, \Red também. A
+variedade de tiposé interessante para evitar a necessidade de criar código para
+trabalhar com os diversos dados requeridos pelo programa. Por exemplo, se voce
+deseja trabalhar com percentuais em determinada tarefa qual a melhor forma?
+Informar o decimal correspondente (e.g. 0,1 para 10\%) e efetuar diretamente o
+cáculo ou informar o percentual e efetuar o cálculo no estilo \codigo{$valor \times 
+  percentual \div 100$}? Ficaria algo assim:
+
+\incss{repl-percent}
+
+
+
+%% 1.  Number Values
+%% 1.1 Decimal
+%% 1.2 Integer
+%% 2.  Series Values
+%% 2.1 Binary
+%% 2.2 Block
+%% 2.3 Email
+%% 2.4 File
+%% 2.5 Hash
+%% 2.6 Image
+%% 2.7 Issue
+%% 2.8 List
+%% 2.9 Paren
+%% 2.10 Path
+%% 2.11 String
+%% 2.12 Tag
+%% 2.13 URL
+%% 3.   Other Values
+%% 3.1  Character
+%% 3.2  Date
+%% 3.3  Logic
+%% 3.4  Money
+%% 3.5  None
+%% 3.6  Pair
+%% 3.7  Refinement
+%% 3.8  Time
+%% 3.9  Tuple
+%% 3.10 Words
+
+
 \section{Expressões}
 \section{Funções}
 \section{Escopo}
 \section{Operadores}
 \section{Controle de fluxo}
-\section{Excessões}
+\section{Exceções}
 \section{Pilha}
 \section{Depuração}
 \section{Estrutura do sistema}
