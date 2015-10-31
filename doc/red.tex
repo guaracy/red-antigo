@@ -62,13 +62,7 @@
 
 \newcommand{\Red}{\textbf{\textcolor{red}{Red }}}
 
-\newcommand{\codigo}[1]{
-  \ttfamily\small
-  \textcolor{Brown}{
-    \textbf{#1}
-  }
-  \normalfont
-}
+\newcommand{\codigo}[1]{\ttfamily\small\textcolor{Brown}{\textbf{#1}}\normalfont}
 
 \title{\huge \textbf{\textcolor{red}{Red}} \\Programming Language}
 \author{Guaracy Monteiro \\ \small https://github.com/guaracy/red} %\thanks{emcs, \LaTeX , \TeX}
@@ -294,40 +288,188 @@ trabalhar com os diversos dados requeridos pelo programa. Por exemplo, se voce
 deseja trabalhar com percentuais em determinada tarefa qual a melhor forma?
 Informar o decimal correspondente (e.g. 0,1 para 10\%) e efetuar diretamente o
 cáculo ou informar o percentual e efetuar o cálculo no estilo \codigo{$valor \times 
-  percentual \div 100$}? Ficaria algo assim:
+  percentual \div 100$} ? Ficaria algo assim:
 
 \incss{repl-percent}
 
+No momento, estão disponíveis os seguintes tipos (alguns não serão utilizados em
+condições normais e, mais importante, alguns ainda não foram definidos
+como\codigo{data} e \codigo{hora}. Por enquanto temos:\\
+\codigo{action!, binary!, bitset!, block!, char!, datatype!, error!, file!, float!,
+function!, get-path!, get-word!, hash!, integer!, issue!, lit-path!, lit-word!,
+logic!, map!, native!, none!, object!, op!, pair!, paren!, path!, percent!,
+point!, refinement!, routine!, set-path!,  set-word!, string!, tuple!,
+typeset!, unset!, url!, vector!, word!}
 
+\subsection{binary!}
 
-%% 1.  Number Values
-%% 1.1 Decimal
-%% 1.2 Integer
-%% 2.  Series Values
-%% 2.1 Binary
-%% 2.2 Block
-%% 2.3 Email
-%% 2.4 File
-%% 2.5 Hash
-%% 2.6 Image
-%% 2.7 Issue
-%% 2.8 List
-%% 2.9 Paren
-%% 2.10 Path
-%% 2.11 String
-%% 2.12 Tag
-%% 2.13 URL
-%% 3.   Other Values
-%% 3.1  Character
-%% 3.2  Date
-%% 3.3  Logic
-%% 3.4  Money
-%% 3.5  None
-%% 3.6  Pair
-%% 3.7  Refinement
-%% 3.8  Time
-%% 3.9  Tuple
-%% 3.10 Words
+TBD
+
+\subsection{bitset!}
+
+TBD
+
+\subsection{block!}
+
+TBD
+
+\subsection{char!}
+
+TBD
+
+\subsection{datatype!}
+
+TBD
+
+\subsection{error!}
+
+TBD
+
+\subsection{file!}
+
+TBD
+
+\subsection{float!}
+
+TBD
+
+\subsection{function!}
+
+TBD
+
+\subsection{get-path!}
+
+TBD
+
+\subsection{get-word}
+
+TBD
+
+\subsection{hash!}
+
+TBD
+
+\subsection{integer!}
+
+TBD
+
+\subsection{issue!}
+
+TBD
+
+\subsection{lit-path!}
+
+TBD
+
+\subsection{lit-word!}
+
+TBD
+
+\subsection{logic!}
+
+TBD
+
+\subsection{map!}
+
+TBD
+
+\subsection{native!}
+
+TBD
+
+\subsection{none}
+
+TBD
+
+\subsection{object!}
+
+TBD
+
+\subsection{op!}
+
+Você poderia perguntar: Tipo de variável operador? Não seria função? Bem,
+podemos ver um operador do tipo soma como uma função. Por exemplo, \codigo{a +
+  b} poderia ser visto como algo do  tipo \codigo{add a b} (Se você conheçe
+Lisp, a expressão \codigo{(+ a b)} faz todo o sentido). Uma lista dos operadores
+atualmente definidos: 
+
+\incss{repl-op}
+
+Por exemplo, podemos ter um programa onde precisamos utilizar frequentemente se
+um valor pertence (∈) a um determinado 
+conjunto. Podemos facilmente criar uma
+função para a tarefa. Mas para a leitura poderia ficar mais fácil termos um
+operador e escrever \codigo{v ∈ l} do que uma função do tipo \codigo{pertence v
+  l}. Você pode trocar o ∈ por um símbolo de acesso mais fácil pelo teclado como
+o Euro (Alt gr + e). Ficaria algo como:
+
+\incss{repl-makeop}
+
+Definimos uma função \codigo{pertence} e criamos o operador \textbf{∈}. 
+
+\subsection{pair!}
+
+TBD
+
+\subsection{paren!}
+
+TBD
+
+\subsection{path!}
+
+TBD
+
+\subsection{percent!}
+
+TBD
+
+\subsection{point!}
+
+TBD
+
+\subsection{refinment!}
+
+TBD
+
+\subsection{routine!}
+
+TBD
+
+\subsection{set-path!}
+
+TBD
+
+\subsection{set-word!}
+
+TBD
+
+\subsection{string!}
+
+TBD
+
+\subsection{tuple!}
+
+TBD
+
+\subsection{typeset!}
+
+TBD
+
+\subsection{unset!}
+
+TBD
+
+\subsection{url!}
+
+TBD
+
+\subsection{vector!}
+
+TBD
+
+\subsection{word!}
+
+TBD
 
 
 \section{Expressões}
