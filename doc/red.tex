@@ -301,6 +301,12 @@ logic!, map!, native!, none!, object!, op!, pair!, paren!, path!, percent!,
 point!, refinement!, routine!, set-path!,  set-word!, string!, tuple!,
 typeset!, unset!, url!, vector!, word!}
 
+Para você descobrir o tipo de uma variável basta entrar com \codigo{type?
+  variavel} e será retornado o tipo atual da variável. Para comparar com um tipo
+específico, basta utilizar o tipo trocando a exclamação por uma interrogação.
+Por exemplo, se quiser verificar se uma variável possui um valor inteiro, basta
+digitar \codigo{integer? variavel} e retornara um verdadeiro ou falso.
+
 \subsection{binary!}
 
 TBD
@@ -430,7 +436,24 @@ TBD
 
 \subsection{percent!}
 
-TBD
+Uma forma fácil de trabalhar com percentuais. Para que um valor seja entendido
+como percentual, basta colocar o percentual como sufixo. O valor é dividido por
+100 interna e automaticamente. Assim, para calcular o percentual de um
+determinado valor, basta multiplicá-lo pelo percentual \codigo{120 * 10\%
+ $\rightarrow$ 12} ou se desejamos saber de qual valor é um percentual, basta
+dividí-lo \codigo{12 / 10\% $\rightarrow$ 120}.
+
+Imediatamente pensamos que, para adicionar um percentual a um valor basta entrar
+com \codigo{120 + 10\% $\rightarrow$ 132}. Sinto informar que, pelo menos no
+atual estágio de desenvolvimento, \textbf{não}. Mas calma, nem tudo está
+perdido. Colocando o tico e o teco para funcionar chegamos a uma solução, no
+mínimo, elegante. Podemos redefinir o operador \codigo{+} da seguinte forma:
+
+\incss{repl-addpercent}
+
+Pronto. É uma das formas de tratar com o problema. Da mesma forma, poderiamos
+dar um desconto (diminuir um percentual do valor) redefinindo o operador
+\codigo{-}. 
 
 \subsection{point!}
 
