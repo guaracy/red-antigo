@@ -260,7 +260,7 @@ adicionar um inteiro em um bloco (no caso pode ser considerado como uma lista).
 Bastiria que a função, por exemplo, adicionasse o número em cada um dos
 elementos. Da mesma forma, para atribuir a função \codigo{sum} para a variável
 \codigo{x} foi necessário utilizar o formato \codigo{x: :sum} para que a função
-não fosse avaliada. A construção \codigo{x: sum 2 3} seria válidade e retornaria
+não fosse avaliada. A construção \codigo{x: sum 2 3} seria validada e retornaria
 o valor \codigo{5}. Portanto:
 
 \begin{center}
@@ -321,7 +321,12 @@ TBD
 
 \subsection{char!}
 
-TBD
+Representa um caractere qualquer. O caractere é escrito entre aspas precedido de
+\textbf{\#}. Para representarmos o caractere \texttt{"A"} usamos \ttfamily{\#"A"}\normalfont.
+Para representar caracteres com valores menor que 32 (espaço), prefixamos com um
+sinal circunflexo. Para o caractere 27 (escape) temos
+\ttfamily{\#"\^{}["}\normalfont. 
+
 
 \subsection{datatype!}
 
