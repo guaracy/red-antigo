@@ -60,6 +60,12 @@
   \normalfont
 }
 
+\newcommand{\txtprog}[1]{
+  \textcolor{brown}{
+    \ttfamily{#1}\normalfont
+  }
+}
+
 \newcommand{\Red}{\textbf{\textcolor{red}{Red }}}
 
 \newcommand{\codigo}[1]{\ttfamily\small\textcolor{Brown}{\textbf{#1}}\normalfont}
@@ -294,12 +300,13 @@ cáculo ou informar o percentual e efetuar o cálculo no estilo \codigo{$valor \
 
 No momento, estão disponíveis os seguintes tipos (alguns não serão utilizados em
 condições normais e, mais importante, alguns ainda não foram definidos
-como\codigo{data} e \codigo{hora}. Por enquanto temos:\\
-\codigo{action!, binary!, bitset!, block!, char!, datatype!, error!, file!, float!,
-function!, get-path!, get-word!, hash!, integer!, issue!, lit-path!, lit-word!,
-logic!, map!, native!, none!, object!, op!, pair!, paren!, path!, percent!,
-point!, refinement!, routine!, set-path!,  set-word!, string!, tuple!,
-typeset!, unset!, url!, vector!, word!}
+como \codigo{data} e \codigo{hora}. Por enquanto temos:\\
+\codigo{action!, binary!, bitset!, block!, char!, datatype!, error!, file!,\\
+float!, function!, get-path!, get-word!, hash!, integer!, issue!, \\
+lit-path!, lit-word!, logic!, map!, native!, none!, object!, op!, \\
+pair!, paren!, path!, percent!, point!, refinement!, routine!, \\
+set-path!, set-word!, string!, tuple!, typeset!, unset!, url!, \\
+vector!, word!} 
 
 Para você descobrir o tipo de uma variável basta entrar com \codigo{type?
   variavel} e será retornado o tipo atual da variável. Para comparar com um tipo
@@ -317,16 +324,24 @@ TBD
 
 \subsection{block!}
 
-TBD
+Blocos são grupos de código e/ou dados e/ou outros blocos e/ou qualquer coisa.
+São delimitados por colchetes \codigo{[ ]}. Imagine, em outras linguagens, uma
+matrix que pode conter qualquer coisa. Podemos efetuar operações em um bloco ou
+mesmo entre blocos. Por exemplo:
+
+\incss{repl-block}
 
 \subsection{char!}
 
 Representa um caractere qualquer. O caractere é escrito entre aspas precedido de
-\textbf{\#}. Para representarmos o caractere \texttt{"A"} usamos \ttfamily{\#"A"}\normalfont.
-Para representar caracteres com valores menor que 32 (espaço), prefixamos com um
-sinal circunflexo. Para o caractere 27 (escape) temos
-\ttfamily{\#"\^{}["}\normalfont. 
+\codigo{\#}. Para representarmos o caractere \codigo{A} usamos
+\codigo{\#"A"}. Se você esquecer o \codigo{\#}, será tratado como uma
+string. Para representar caracteres com valores menor que 32 (espaço),
+prefixamos com um sinal circunflexo. Para o caractere 27 (escape) temos
+\codigo{\#"\^{}["}. O ambiente já define alguns caracteres para
+facilitar a utilização em algumas ocasiões. 
 
+\incss{repl-char}
 
 \subsection{datatype!}
 
