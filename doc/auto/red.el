@@ -31,7 +31,6 @@
     "color")
    (TeX-add-symbols
     '("codigo" 1)
-    '("txtprog" 1)
     '("incss" 1)
     '("inchf" 2)
     "Red")
