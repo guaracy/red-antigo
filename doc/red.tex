@@ -283,7 +283,7 @@ o valor \codigo{5}. Portanto:
 \section{Tipos de dados}
 
 Este é um tópico onde REBOL é muito rico e, por consequencia, \Red também. A
-variedade de tiposé interessante para evitar a necessidade de criar código para
+variedade de tipos é interessante para evitar a necessidade de criar código para
 trabalhar com os diversos dados requeridos pelo programa. Por exemplo, se voce
 deseja trabalhar com percentuais em determinada tarefa qual a melhor forma?
 Informar o decimal correspondente (e.g. 0,1 para 10\%) e efetuar diretamente o
@@ -300,13 +300,23 @@ float!, function!, get-path!, get-word!, hash!, integer!, issue!, \\
 lit-path!, lit-word!, logic!, map!, native!, none!, object!, op!, \\
 pair!, paren!, path!, percent!, point!, refinement!, routine!, \\
 set-path!, set-word!, string!, tuple!, typeset!, unset!, url!, \\
-vector!, word!} 
+vector!, word!}. Alguns não importam para a programação normal, sendo mais
+relevantes internamente.
 
-Para você descobrir o tipo de uma variável basta entrar com \codigo{type?
-  variavel} e será retornado o tipo atual da variável. Para comparar com um tipo
+Para você descobrir o tipo de uma variável basta entrar com \codigo{type?} e uma
+variável ou um valor e será retornado o tipo atual. Para comparar com um tipo
 específico, basta utilizar o tipo trocando a exclamação por uma interrogação.
 Por exemplo, se quiser verificar se uma variável possui um valor inteiro, basta
-digitar \codigo{integer? variavel} e retornara um verdadeiro ou falso.
+digitar \codigo{integer?} variável ou valor e retornara um verdadeiro ou falso.
+
+Para converter um tipo de dado em outro, utilizamos \codigo{to}, o tipo de dado
+que desejamos e o valor a ser convertido.
+
+\incss{repl-to}
+
+Internamente, algumas conversões são executadas automaticamente para que um
+determinado cálculo seja efetuado. Converter um valor inteiro para ponto
+flutuante, por exemplo.
 
 \subsection{binary!}
 
@@ -320,8 +330,8 @@ TBD
 
 Blocos são grupos de código e/ou dados e/ou outros blocos e/ou qualquer coisa.
 São delimitados por colchetes \codigo{[ ]}. Imagine, em outras linguagens, uma
-matrix que pode conter qualquer coisa. Podemos efetuar operações em um bloco ou
-mesmo entre blocos. Por exemplo:
+matriz que pode conter qualquer coisa. Podemos efetuar operações em um bloco ou
+mesmo entre blocos.
 
 \incss{repl-block}
 
@@ -339,7 +349,9 @@ facilitar a utilização em algumas ocasiões.
 
 \subsection{datatype!}
 
-TBD
+Uso interno.
+
+\codigo{type? error! => datatype!}
 
 \subsection{error!}
 
@@ -366,7 +378,7 @@ funções (\ref{sec:func})
 
 TBD
 
-\subsection{get-word}
+\subsection{get-word!}
 
 TBD
 
