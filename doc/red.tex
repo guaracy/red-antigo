@@ -527,7 +527,16 @@ TBD
 
 \subsection{refinment!}
 
-TBD
+São variáveis utilizadas para refinar determinado procedimento. Se você
+verificar a função \codigo{trim} (inicialmente remove espaços no final de uma
+string), verá que possui a seguinte estrutura: 
+
+\incss{repl-refinment}
+
+Então \codigo{/head  /tail  /auto  /lines  /all  /with} são \textit{refinments}.
+Se você chamar \codigo{trim/head string}, apenas os espaços no início serão
+removidos. Se for chamada como \codigo{trim/all string}, todos os espaços serão
+removidos, inclusive os internos.
 
 \subsection{routine!}
 
