@@ -36,6 +36,7 @@
     "Red")
    (LaTeX-add-labels
     "listing:3"
+    "ssec:path"
     "sec:func")
    (LaTeX-add-color-definecolors
     "bg"

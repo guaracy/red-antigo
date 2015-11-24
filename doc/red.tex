@@ -355,7 +355,7 @@ facilitar a utilização em algumas ocasiões.
 
 \subsection{datatype!}
 
-Uso interno.
+Uso interno. Tipo de dado.
 
 \codigo{type? error! = datatype!}
 
@@ -365,7 +365,9 @@ TBD.
 
 \subsection{file!}
 
-TBD
+Contém o nome ou caminho de um arquivo ou diretório. É precedido por um
+percentual. Por exemplo: \codigo{\%arquivo.txt} e
+\codigo{\%/home/root/arquivo.txt} (veja também path!\ref{ssec:path}).
 
 \subsection{float!}
 
@@ -485,7 +487,7 @@ Basicamente é um bloco delimitado por parenteses e deve ser avaliado antes.
 
 \incss{repl-paren}
 
-\subsection{path!}
+\subsection{path!}\label{ssec:path}
 
 Informa o caminho para algum lugar. Pode ser um subdiretório, um componenete de
 um objeto, um caractere de uma string, etc.. É definido sepando os elementos por
