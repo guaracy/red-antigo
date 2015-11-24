@@ -35,7 +35,8 @@
     '("inchf" 2)
     "Red")
    (LaTeX-add-labels
-    "listing:3")
+    "listing:3"
+    "sec:func")
    (LaTeX-add-color-definecolors
     "bg"
     "shadecolor")))

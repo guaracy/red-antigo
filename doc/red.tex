@@ -355,7 +355,12 @@ TBD
 
 \subsection{function!}
 
-TBD
+Indicam que a variável contém uma função. Você poderá utilizar \codigo{help
+  função} para verificar a utilização da mesma e/ou digitar \codigo{source
+  função} para ver o código fonte da função. Outras informações na seção sobre
+funções (\ref{sec:func})
+
+\incss{repl-function}
 
 \subsection{get-path!}
 
@@ -443,8 +448,8 @@ Para acessar o x podemos digitar \codigo{pt/x} ou \codigo{pt/1}. Para o y
 podemos digitar \codigo{pt/y} ou \codigo{pt/1}. Assim poderemos alterar os
 valores individualmente. Para colocar 6 no x basta entrar \codigo{pt/x:6}.
 
-Também são permitidas operações sobre os pares. Um par irá afetar os valores
-individualmente \codigo{2x5 + 2 $\rightarrow$ 4x7}. Se o operedor for um par,
+Também são permitidas operações sobre os pares. Um número afetar ambos os
+valores \codigo{2x5 + 2 $\rightarrow$ 4x7}. Se o operedor for um par,
 irá afetar os valores individualmente \codigo{2x5 + 2x1 $\rightarrow$ 4x6}.
 
 \subsection{paren!}
@@ -478,10 +483,7 @@ dar um desconto (diminuir um percentual do valor) redefinindo o operador
 
 \subsection{point!}
 
-Armazenam pares de valores, geralmente utilizados em coordenadas cartesianas.
-Informamos os dois valores (x e y) separados por um \codigo{x} minúsculo.
-
-\codigo{nota: por enquanto não aceita decimais}
+TBD
 
 \subsection{refinment!}
 
@@ -534,7 +536,7 @@ TBD
 
 
 \section{Expressões}
-\section{Funções}
+\section{Funções}\label{sec:func}
 \section{Escopo}
 \section{Operadores}
 \section{Controle de fluxo}
