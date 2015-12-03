@@ -154,13 +154,15 @@ extenso: object [
     foreach v vmat [
         ;append ext to-extenso-centena ext v i unidades
         to-extenso-centena ext v i unidades
-        if v = 0[
-            if i = 2 [
-                if (not km) and (not kg) [
-                    if ((to integer! valor) > 1) [append ext " reais "]
-                ]
-            ]
-        ]        
+;        if v = 0[
+;            if i = 2 [
+;                if (not km) and (not kg) [
+;                    if ((to integer! valor) > 1) [append ext " reais "]
+;                ]
+;            ]
+;        ]
+        if all [(v = 0) (i = 2) (not km) (not kg) ((to integer! valor) > 1)]
+            [append ext " reais "]
         ix: ix + 1
         case [
             i > 2 [if (vmat/:ix > 0) [append ext ", "]]
